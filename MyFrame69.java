@@ -10,18 +10,25 @@ import java.io.File;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MyFrame69 extends JFrame implements MouseListener {
 
+  
+
+    JPanel imagePanel;
+    JPanel textPanel;
+
     JLabel label;
+    JLabel labelText;
 
     // adding audio:
     Clip clipA;
@@ -61,8 +68,23 @@ public class MyFrame69 extends JFrame implements MouseListener {
         this.setSize(500, 500);
         this.setLayout(new FlowLayout());
 
+        imagePanel = new JPanel();
+        textPanel = new JPanel();
+
         label = new JLabel();
         label.addMouseListener(this);
+
+        labelText = new JLabel();
+        labelText.setText("Bro, do you even code?"); // Set text of the label
+        labelText.setVerticalTextPosition(JLabel.TOP); // set Text TOP, CENTER, BOTTOM of imageicon
+
+        imagePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        label.setIcon(disappointed);
+        imagePanel.add(label);
+
+        textPanel.setLayout(new FlowLayout());
+        labelText.setText("Bro, do you even code?");
+        textPanel.add(labelText);
 
         // images
         disappointed = new ImageIcon("disappointed96.png");
@@ -76,7 +98,12 @@ public class MyFrame69 extends JFrame implements MouseListener {
         label.setIcon(disappointed);
 
         this.add(label);
-        this.pack();
+        this.add(labelText);
+        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+        this.add(imagePanel);
+        this.add(textPanel);
+
+        this.pack();//quitar para cambiar el tamanyo de la ventana
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
@@ -85,6 +112,8 @@ public class MyFrame69 extends JFrame implements MouseListener {
         image = toolkit.getImage("kiss32.png");
         Cursor customCursor = toolkit.createCustomCursor(image, new Point(0, 0), "kiss");
         label.setCursor(customCursor);
+
+        // text
 
     }
 
