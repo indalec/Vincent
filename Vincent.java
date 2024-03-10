@@ -19,7 +19,7 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Vincent extends JFrame implements MouseListener {
+public class Vincent extends JFrame implements MouseListener, ButtonClickListener {
 
     // declaring panels
     JPanel panelImage;
@@ -64,7 +64,7 @@ public class Vincent extends JFrame implements MouseListener {
     // declaring counter variable
     int counter = 0;
 
-    MyButton button;
+    MyResetButton button;
 
     // constructor
     Vincent() {
@@ -77,8 +77,7 @@ public class Vincent extends JFrame implements MouseListener {
         panelImage = new JPanel();
         panelText = new JPanel();
         panelButton = new JPanel();
-        button = new MyButton("");
-
+        button = new MyResetButton("", this);
         // setting size of the panels
         panelImage.setPreferredSize(new Dimension(100, 130));
         panelText.setPreferredSize(new Dimension(300, 150));
@@ -104,21 +103,24 @@ public class Vincent extends JFrame implements MouseListener {
 
         labelImage.setIcon(disappointed);
 
-        // for developement purposes:
-        labelImage.setOpaque(true); // !!!
-        labelImage.setBackground(Color.RED);// !!!
-
-        labelText.setOpaque(true);// !!!
-        labelText.setBackground(Color.green);// !!!
-
-        panelText.setOpaque(true);// !!!
-        panelText.setBackground(Color.ORANGE);// !!!
-
-        panelImage.setOpaque(true);// !!!
-        panelImage.setBackground(Color.BLUE);// !!!
-
-        panelButton.setOpaque(true);// !!!
-        panelButton.setBackground(Color.RED);// !!!
+        /*
+         * // for developement purposes:
+         * labelImage.setOpaque(true); // !!!
+         * labelImage.setBackground(Color.RED);// !!!
+         * 
+         * labelText.setOpaque(true);// !!!
+         * labelText.setBackground(Color.green);// !!!
+         * 
+         * panelText.setOpaque(true);// !!!
+         * panelText.setBackground(Color.ORANGE);// !!!
+         * 
+         * panelImage.setOpaque(true);// !!!
+         * panelImage.setBackground(Color.BLUE);// !!!
+         
+         panelButton.setOpaque(true);// !!!
+         panelButton.setBackground(Color.RED);// !!!
+         */
+         
 
         // custom cursor for labelImage
         toolkit = Toolkit.getDefaultToolkit();
@@ -138,17 +140,20 @@ public class Vincent extends JFrame implements MouseListener {
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         panelImage.add(labelImage);
         panelText.add(labelText);
-        panelButton.add(button);
 
     }
 
+
+
     @Override
     public void mouseClicked(MouseEvent e) {
+
     }
 
     // 1__________________________________________________________________________
     @Override
     public void mousePressed(MouseEvent e) {
+        panelButton.add(button);
 
         // disable right mouse button
         if (SwingUtilities.isRightMouseButton(e)) {
@@ -185,7 +190,7 @@ public class Vincent extends JFrame implements MouseListener {
 
                 }
                 // setting timer
-                timer = new javax.swing.Timer(5000, new ActionListener() {//
+                timer = new javax.swing.Timer(2900, new ActionListener() {//
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
@@ -225,7 +230,7 @@ public class Vincent extends JFrame implements MouseListener {
                 }
 
                 // setting timer
-                timer = new javax.swing.Timer(6500, new ActionListener() {//
+                timer = new javax.swing.Timer(6000, new ActionListener() {//
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
@@ -401,7 +406,33 @@ public class Vincent extends JFrame implements MouseListener {
         }
 
     }
+    @Override
+    public void onButtonClick() {
+        // Acción a realizar cuando se presiona MyButton
+        System.out.println("The rewind button was pressed");
+
+        timer.stop();
+        counter = 0;
+        kissGiven = false;
+        happyState = false;
+        labelImage.setIcon(disappointed);
+        try {
+            clipA.stop();
+            clipB.stop();
+        } catch (Exception f) {
+        }
+        labelText.setText(
+                "<html><center>Meet Vincent.<br>He's feeling blue.<br>A sweet kiss might just make his day!</center></html>");
+        timer.stop();
+        panelButton.remove(button);
+
+        //unnecessary??:
+        //panelButton.revalidate(); 
+        //panelButton.repaint(); 
+    }
 
 }
 
-// Indaleci Valenzuela - 2024
+interface ButtonClickListener {
+    void onButtonClick();
+}

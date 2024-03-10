@@ -4,14 +4,17 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
-import java.awt.Font;
+//import java.awt.Font;
 import javax.swing.BorderFactory;
 
-public class MyButton extends JButton implements ActionListener {
+public class MyResetButton extends JButton implements ActionListener {
+    private ButtonClickListener listener; // Agregar un campo para el listener
+
     
     JLabel label;
+    
 
-    public MyButton(String text) {
+    public MyResetButton(String text, ButtonClickListener listener) {
         // Configure button
         this.setText(text);
         this.setFocusable(false);
@@ -24,6 +27,7 @@ public class MyButton extends JButton implements ActionListener {
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createEtchedBorder());
         this.addActionListener(this);
+        this.listener = listener;
 
         // Inicialización de la etiqueta
         label = new JLabel();
@@ -31,10 +35,17 @@ public class MyButton extends JButton implements ActionListener {
         // Aquí puedes agregar la etiqueta a tu frame o panel
     }
 
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Acciones a realizar cuando se presiona el botón
-        label.setVisible(true);
-        
+        if (listener != null) {
+            listener.onButtonClick(); // Llamar al método del listener
+        }
     }
+}
+
+// La interfaz ButtonClickListener para manejar los clics del botón
+interface ButtonClickListener {
+    void onButtonClick();
 }
