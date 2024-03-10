@@ -408,7 +408,7 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
     }
     @Override
     public void onButtonClick() {
-        // Acción a realizar cuando se presiona MyButton
+        
         System.out.println("The rewind button was pressed");
 
         timer.stop();
@@ -433,6 +433,6 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
 
 }
 //
-// interface ButtonClickListener {
-//    void onButtonClick();
-//}
+ interface ButtonClickListener {
+  void onButtonClick();
+}
