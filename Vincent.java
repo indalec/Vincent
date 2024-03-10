@@ -1,6 +1,6 @@
 import java.awt.Toolkit;
 import java.awt.Image;
-//import java.awt.Color;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -24,6 +24,7 @@ public class Vincent extends JFrame implements MouseListener {
     // declaring panels
     JPanel panelImage;
     JPanel panelText;
+    JPanel panelButton;
 
     // declaring labels
     JLabel labelImage;
@@ -63,20 +64,25 @@ public class Vincent extends JFrame implements MouseListener {
     // declaring counter variable
     int counter = 0;
 
+    MyButton button;
+
     // constructor
     Vincent() {
         // window (= frame?)
         this.setTitle("Vincent 0.2");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(350, 220);
+        this.setSize(350, 300);
 
         // panels
         panelImage = new JPanel();
         panelText = new JPanel();
+        panelButton = new JPanel();
+        button = new MyButton("");
 
         // setting size of the panels
         panelImage.setPreferredSize(new Dimension(100, 130));
         panelText.setPreferredSize(new Dimension(300, 150));
+        panelButton.setPreferredSize(new Dimension(300, 150));
         // labels
         labelImage = new JLabel();
         labelImage.addMouseListener(this);
@@ -97,20 +103,22 @@ public class Vincent extends JFrame implements MouseListener {
         smile = new ImageIcon("images/smile96.png");
 
         labelImage.setIcon(disappointed);
-        /*
-         * // for developement purposes:
-         * labelImage.setOpaque(true); // !!!
-         * labelImage.setBackground(Color.RED);// !!!
-         * 
-         * labelText.setOpaque(true);// !!!
-         * labelText.setBackground(Color.green);// !!!
-         * 
-         * panelText.setOpaque(true);// !!!
-         * panelText.setBackground(Color.ORANGE);// !!!
-         * 
-         * panelImage.setOpaque(true);// !!!
-         * panelImage.setBackground(Color.BLUE);// !!!
-         */
+
+        // for developement purposes:
+        labelImage.setOpaque(true); // !!!
+        labelImage.setBackground(Color.RED);// !!!
+
+        labelText.setOpaque(true);// !!!
+        labelText.setBackground(Color.green);// !!!
+
+        panelText.setOpaque(true);// !!!
+        panelText.setBackground(Color.ORANGE);// !!!
+
+        panelImage.setOpaque(true);// !!!
+        panelImage.setBackground(Color.BLUE);// !!!
+
+        panelButton.setOpaque(true);// !!!
+        panelButton.setBackground(Color.RED);// !!!
 
         // custom cursor for labelImage
         toolkit = Toolkit.getDefaultToolkit();
@@ -121,14 +129,16 @@ public class Vincent extends JFrame implements MouseListener {
         //
         this.add(panelImage);
         this.add(panelText);
-        this.setResizable(false);
-        //this.pack();// quit so the window does not "fit" to the elements
+        this.add(panelButton);
+        this.setResizable(true);
+        // this.pack();// quit so the window does not "fit" to the elements
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        //Layout (organize panels):
+        // Layout (organize panels):
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         panelImage.add(labelImage);
         panelText.add(labelText);
+        panelButton.add(button);
 
     }
 
@@ -174,7 +184,7 @@ public class Vincent extends JFrame implements MouseListener {
                     clipA.start();
 
                 }
-// setting timer
+                // setting timer
                 timer = new javax.swing.Timer(5000, new ActionListener() {//
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -214,7 +224,7 @@ public class Vincent extends JFrame implements MouseListener {
                     clipB.start();
                 }
 
-// setting timer
+                // setting timer
                 timer = new javax.swing.Timer(6500, new ActionListener() {//
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -256,8 +266,8 @@ public class Vincent extends JFrame implements MouseListener {
 
             if (counter == 0) {
                 System.out.println("Counter = 0");
-                
-                //try and catch to avoid error int the terminal:
+
+                // try and catch to avoid error int the terminal:
                 try {
                     clipA.stop();
                 } catch (Exception f) {
@@ -394,54 +404,4 @@ public class Vincent extends JFrame implements MouseListener {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Indaleci Valenzuela - 2024
+// Indaleci Valenzuela - 2024
