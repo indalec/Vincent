@@ -432,7 +432,7 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
     }
 
 }
-
-interface ButtonClickListener {
-    void onButtonClick();
-}
+//
+// interface ButtonClickListener {
+//    void onButtonClick();
+//}
