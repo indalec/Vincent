@@ -1,6 +1,6 @@
 import java.awt.Toolkit;
 import java.awt.Image;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -31,10 +31,10 @@ public class Vincent extends JFrame implements MouseListener {
 
     // declaring audio clips
     Clip clipA;
-    File fileA = new File("Song2a.wav");
+    File fileA = new File("audio/Song2a.wav");
 
     Clip clipB;
-    File fileB = new File("Song2b.wav");
+    File fileB = new File("audio/Song2b.wav");
 
     // declaring images
     ImageIcon disappointed;
@@ -68,7 +68,7 @@ public class Vincent extends JFrame implements MouseListener {
         // window (= frame?)
         this.setTitle("Vincent 0.2");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(300, 200);
+        this.setSize(350, 220);
 
         // panels
         panelImage = new JPanel();
@@ -87,14 +87,14 @@ public class Vincent extends JFrame implements MouseListener {
         panelText.add(labelText);
 
         // images
-        disappointed = new ImageIcon("disappointed96.png");
-        flushed = new ImageIcon("flushed96.png");
-        kiss = new ImageIcon("closed_eyes_kiss96.png");
-        pleading = new ImageIcon("pleading96.png");
-        smileEyesKiss = new ImageIcon("smiling_eyes_kiss96.png");
-        smileHearts = new ImageIcon("smiling_with_hearts96.png");
-        smileFlushed = new ImageIcon("smilingFaceA96.png");
-        smile = new ImageIcon("smile96.png");
+        disappointed = new ImageIcon("images/disappointed96.png");
+        flushed = new ImageIcon("images/flushed96.png");
+        kiss = new ImageIcon("images/closed_eyes_kiss96.png");
+        pleading = new ImageIcon("images/pleading96.png");
+        smileEyesKiss = new ImageIcon("images/smiling_eyes_kiss96.png");
+        smileHearts = new ImageIcon("images/smiling_with_hearts96.png");
+        smileFlushed = new ImageIcon("images/smilingFaceA96.png");
+        smile = new ImageIcon("images/smile96.png");
 
         labelImage.setIcon(disappointed);
         /*
@@ -114,7 +114,7 @@ public class Vincent extends JFrame implements MouseListener {
 
         // custom cursor for labelImage
         toolkit = Toolkit.getDefaultToolkit();
-        lips = toolkit.getImage("kiss32.png");
+        lips = toolkit.getImage("images/kiss32.png");
         customCursor = toolkit.createCustomCursor(lips, new Point(0, 0), "kiss");
         labelImage.setCursor(customCursor);
 
@@ -125,6 +125,7 @@ public class Vincent extends JFrame implements MouseListener {
         //this.pack();// quit so the window does not "fit" to the elements
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        //Layout (organize panels):
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         panelImage.add(labelImage);
         panelText.add(labelText);
@@ -173,7 +174,7 @@ public class Vincent extends JFrame implements MouseListener {
                     clipA.start();
 
                 }
-
+// setting timer
                 timer = new javax.swing.Timer(5000, new ActionListener() {//
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -213,6 +214,7 @@ public class Vincent extends JFrame implements MouseListener {
                     clipB.start();
                 }
 
+// setting timer
                 timer = new javax.swing.Timer(6500, new ActionListener() {//
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -254,7 +256,8 @@ public class Vincent extends JFrame implements MouseListener {
 
             if (counter == 0) {
                 System.out.println("Counter = 0");
-
+                
+                //try and catch to avoid error int the terminal:
                 try {
                     clipA.stop();
                 } catch (Exception f) {
@@ -333,7 +336,7 @@ public class Vincent extends JFrame implements MouseListener {
             labelImage.setIcon(smileFlushed); // this line is necessary, otherwise inconsistent cases can occur
 
             if (happyState) {
-                timer = new javax.swing.Timer(2000, new ActionListener() {
+                timer = new javax.swing.Timer(1300, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
@@ -390,3 +393,55 @@ public class Vincent extends JFrame implements MouseListener {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Indaleci Valenzuela - 2024
