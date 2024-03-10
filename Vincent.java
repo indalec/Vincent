@@ -3,7 +3,6 @@ import java.awt.Image;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,7 +19,7 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MyFrame69 extends JFrame implements MouseListener {
+public class Vincent extends JFrame implements MouseListener {
 
     // declaring panels
     JPanel panelImage;
@@ -46,6 +45,7 @@ public class MyFrame69 extends JFrame implements MouseListener {
     ImageIcon smileEyesKiss;
     ImageIcon smileHearts;
     ImageIcon smileFlushed;
+    ImageIcon smile;
 
     // declaring timer
     Timer timer;
@@ -64,8 +64,9 @@ public class MyFrame69 extends JFrame implements MouseListener {
     int counter = 0;
 
     // constructor
-    MyFrame69() {
-        // window
+    Vincent() {
+        // window (= frame?)
+        this.setTitle("Vincent 0.2");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(300, 200);
 
@@ -73,14 +74,16 @@ public class MyFrame69 extends JFrame implements MouseListener {
         panelImage = new JPanel();
         panelText = new JPanel();
 
+        // setting size of the panels
         panelImage.setPreferredSize(new Dimension(100, 130));
         panelText.setPreferredSize(new Dimension(300, 150));
         // labels
         labelImage = new JLabel();
         labelImage.addMouseListener(this);
-
+        // text
         labelText = new JLabel();
-        labelText.setText("This is Vincent :D");
+        labelText.setText(
+                "<html><center>Meet Vincent.<br>He's feeling blue.<br>A sweet kiss might just make his day!</center></html>");
         panelText.add(labelText);
 
         // images
@@ -91,32 +94,35 @@ public class MyFrame69 extends JFrame implements MouseListener {
         smileEyesKiss = new ImageIcon("smiling_eyes_kiss96.png");
         smileHearts = new ImageIcon("smiling_with_hearts96.png");
         smileFlushed = new ImageIcon("smilingFaceA96.png");
+        smile = new ImageIcon("smile96.png");
 
         labelImage.setIcon(disappointed);
-        // for developement purposes:
-        labelImage.setOpaque(true); // !!!
-        labelImage.setBackground(Color.RED);// !!!
+        /*
+         * // for developement purposes:
+         * labelImage.setOpaque(true); // !!!
+         * labelImage.setBackground(Color.RED);// !!!
+         * 
+         * labelText.setOpaque(true);// !!!
+         * labelText.setBackground(Color.green);// !!!
+         * 
+         * panelText.setOpaque(true);// !!!
+         * panelText.setBackground(Color.ORANGE);// !!!
+         * 
+         * panelImage.setOpaque(true);// !!!
+         * panelImage.setBackground(Color.BLUE);// !!!
+         */
 
-        labelText.setOpaque(true);// !!!
-        labelText.setBackground(Color.green);// !!!
-
-        panelText.setOpaque(true);// !!!
-        panelText.setBackground(Color.ORANGE);// !!!
-
-        panelImage.setOpaque(true);// !!!
-        panelImage.setBackground(Color.BLUE);// !!!
-
-        // cursor
+        // custom cursor for labelImage
         toolkit = Toolkit.getDefaultToolkit();
         lips = toolkit.getImage("kiss32.png");
         customCursor = toolkit.createCustomCursor(lips, new Point(0, 0), "kiss");
         labelImage.setCursor(customCursor);
 
-        this.setTitle("Vincent 0.2");
+        //
         this.add(panelImage);
         this.add(panelText);
         this.setResizable(false);
-        // this.pack();// quit so the window does not fit to the elements
+        //this.pack();// quit so the window does not "fit" to the elements
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
@@ -133,14 +139,13 @@ public class MyFrame69 extends JFrame implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
 
-        labelText.setText("Giving a kiss...");
-
         // disable right mouse button
         if (SwingUtilities.isRightMouseButton(e)) {
 
             System.out.println("Right mouse button disabled.");
 
         } else {
+            labelText.setText("<html><center>You're giving him a kiss...</center></html>");
 
             System.out.println("You pressed the mouse");
 
@@ -175,7 +180,7 @@ public class MyFrame69 extends JFrame implements MouseListener {
 
                         System.out.println("The kiss was given");
                         labelImage.setIcon(smileEyesKiss);
-                        labelText.setText("You gave Vincent a kiss :D");
+                        labelText.setText("<html><center>*mwah*</center></html>");
                         kissGiven = true;
                     }
                 });
@@ -189,6 +194,7 @@ public class MyFrame69 extends JFrame implements MouseListener {
                 System.out.println("Counter = 1");
 
                 labelImage.setIcon(kiss);
+                labelText.setText("<html><center>Hold tight!<br>Keep pressing to show some love!</center></html>");
 
                 // adding audio
                 try {
@@ -207,24 +213,27 @@ public class MyFrame69 extends JFrame implements MouseListener {
                     clipB.start();
                 }
 
-                timer = new javax.swing.Timer(5000, new ActionListener() {//
+                timer = new javax.swing.Timer(6500, new ActionListener() {//
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        
+
                         System.out.println("The second kiss was given");
                         labelImage.setIcon(smileEyesKiss);
                         kissGiven = true;
+                        labelText.setText("<html><center>*smack*</center></html>");
+
                     }
                 });
                 timer.setRepeats(false);
 
                 timer.start();
 
-            // third itineration:
+                // third itineration:
             } else {
                 System.out.println("Counter = more than 1");
 
                 labelImage.setIcon(kiss);
+                labelText.setText("<html><center>You're giving him another kiss...</center></html>");
 
             }
         }
@@ -237,7 +246,7 @@ public class MyFrame69 extends JFrame implements MouseListener {
 
         // disable right mouse button
         if (SwingUtilities.isRightMouseButton(e)) {
-            
+
             System.out.println("Right mouse button disabled.");
         } else {
 
@@ -258,10 +267,14 @@ public class MyFrame69 extends JFrame implements MouseListener {
                     labelImage.setIcon(smileFlushed);
                     kissGiven = false;
                     happyState = true;
+                    labelText.setText("<html><center>That was a nice kiss...</center></html>");
 
                 } else {
 
                     labelImage.setIcon(pleading);
+                    labelText.setText(
+                            "<html><center>Oh no, Vincent didn't feel that one.<br>Try a longer kiss!</center></html>");
+
                 }
 
             } else if (counter == 1) {
@@ -279,9 +292,15 @@ public class MyFrame69 extends JFrame implements MouseListener {
                     labelImage.setIcon(smileHearts);
                     kissGiven = false;
                     happyState = true;
+                    labelText.setText(
+                            "<html><center>Vincent is overwhelmed with joy<br>thanks to your kisses!</center></html>");
+
                 } else {
 
                     labelImage.setIcon(pleading);
+                    labelText.setText(
+                            "<html><center>So close! Vincent felt that one,<br>but let's try for a longer kiss.</center></html>");
+
                 }
 
             } else {
@@ -321,6 +340,8 @@ public class MyFrame69 extends JFrame implements MouseListener {
                         System.out.println("He's sad again.");
 
                         labelImage.setIcon(pleading);
+                        labelText.setText(
+                                "<html><center>... but Vincent is still feeling blue.<br>Almost there! Another kiss might be<br>just what Vincent needs.</center></html>");
 
                         happyState = false;
 
@@ -360,7 +381,9 @@ public class MyFrame69 extends JFrame implements MouseListener {
 
         } else {
             System.out.println("Counter = more than 1");
-            labelImage.setIcon(smileHearts);
+            labelImage.setIcon(smile);
+            labelText.setText(
+                    "<html><center>There you go! With that kiss,<br>Vincent's day is brighter, and so is yours.<br>Now you can go further with your life!</center></html>");
 
         }
 
