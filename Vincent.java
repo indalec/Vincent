@@ -1,8 +1,9 @@
 import java.awt.Toolkit;
 import java.awt.Image;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -47,6 +48,7 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
     ImageIcon smileHearts;
     ImageIcon smileFlushed;
     ImageIcon smile;
+    Image barIcon;//not working??
 
     // declaring timer
     Timer timer;
@@ -64,11 +66,15 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
     // declaring counter variable
     int counter = 0;
 
+    // declaring button
     MyResetButton button;
+
+    //declaring Font
+    Font font;
 
     // constructor
     Vincent() {
-        // window (= frame?)
+        // frame
         this.setTitle("Vincent 0.2");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(350, 300);
@@ -99,7 +105,11 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
         smileEyesKiss = new ImageIcon("images/smiling_eyes_kiss96.png");
         smileHearts = new ImageIcon("images/smiling_with_hearts96.png");
         smileFlushed = new ImageIcon("images/smilingFaceA96.png");
-        smile = new ImageIcon("images/smile96.png");
+        smile = new ImageIcon("images/smile96.png");//not working??
+
+        //tab icon 
+        barIcon = Toolkit.getDefaultToolkit().getImage("images/barIcon.ico");//not working??
+
 
         labelImage.setIcon(disappointed);
 
@@ -116,11 +126,14 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
          * 
          * panelImage.setOpaque(true);// !!!
          * panelImage.setBackground(Color.BLUE);// !!!
-         
-         panelButton.setOpaque(true);// !!!
-         panelButton.setBackground(Color.RED);// !!!
+         * 
+         * panelButton.setOpaque(true);// !!!
+         * panelButton.setBackground(Color.RED);// !!!
          */
-         
+
+
+         //font
+         font = new Font("Arial", Font.BOLD, 14);
 
         // custom cursor for labelImage
         toolkit = Toolkit.getDefaultToolkit();
@@ -132,7 +145,7 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
         this.add(panelImage);
         this.add(panelText);
         this.add(panelButton);
-        this.setResizable(true);
+        this.setResizable(false);
         // this.pack();// quit so the window does not "fit" to the elements
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -140,10 +153,10 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         panelImage.add(labelImage);
         panelText.add(labelText);
+        labelText.setFont(font);
+        this.setIconImage(barIcon); //not working??
 
     }
-
-
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -272,7 +285,7 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
             if (counter == 0) {
                 System.out.println("Counter = 0");
 
-                // try and catch to avoid error int the terminal:
+                // try and catch to avoid error in the terminal:
                 try {
                     clipA.stop();
                 } catch (Exception f) {
@@ -406,9 +419,10 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
         }
 
     }
+
     @Override
     public void onButtonClick() {
-        
+
         System.out.println("The rewind button was pressed");
 
         timer.stop();
@@ -422,17 +436,18 @@ public class Vincent extends JFrame implements MouseListener, ButtonClickListene
         } catch (Exception f) {
         }
         labelText.setText(
-                "<html><center>Meet Vincent.<br>He's feeling blue.<br>A sweet kiss might just make his day!</center></html>");
+                "<html><center>This is Vincent.<br>He's feeling blue.<br>A sweet kiss might just make his day!</center></html>");
         timer.stop();
         panelButton.remove(button);
 
-        //unnecessary??:
-        //panelButton.revalidate(); 
-        //panelButton.repaint(); 
+        // unnecessary if frame is not resizable???:
+         panelButton.revalidate();
+         panelButton.repaint();
     }
 
 }
-//
- interface ButtonClickListener {
-  void onButtonClick();
+
+
+interface ButtonClickListener {
+    void onButtonClick();
 }
